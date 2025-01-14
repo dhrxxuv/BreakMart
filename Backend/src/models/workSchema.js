@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const workSchema = new mongoose.Schema({
     name: { type: String, required: true }, 
     description: { type: String, required: true }, 
-    images: { type: [String], required: true }, 
+    images: { type: [String], required: false }, 
     video: { type: [String], required: false }, 
     isFeatured: { type: Boolean, default: false }, 
     youtubeLinks: { type: [String], required: false }, 
