@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Work = require('../models/Work');
+const Work = require('../models/workSchema');
 
 // Middleware for parsing request bodies (for POST and PUT requests)
 const bodyParser = require('body-parser');
