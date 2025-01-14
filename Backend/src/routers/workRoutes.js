@@ -1,9 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const Work = require('../models/workSchema');
+const multiUpload = require('../middleware/multiMulter');
 
 // Middleware for parsing request bodies (for POST and PUT requests)
 const bodyParser = require('body-parser');
+const upload = require('../middleware/multer');
 router.use(bodyParser.json());
 
 // 1. GET: Fetch work by ID
@@ -49,8 +51,13 @@ router.get('/works/featured/:category', (req, res) => {
 });
 
 // 4. POST: Create a new work
-router.post('/work', (req, res) => {
-  const { name, description, category, featuredImage, images, isFeatured, youtubeEmbedLink, subCategories } = req.body;
+router.post('/work',  upload.single('featuredImage') ,(req, res) => {
+  const { name, description, category, isFeatured, youtubeEmbedLink, subCategories } = req.body;
+
+  // const images = req.files.map(file => file.path);
+  // console.log('Images:', images);
+  const featuredImage = `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`;
+  console.log('Featured Image:', featuredImage);
 
   const newWork = new Work({
     name,
