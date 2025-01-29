@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from "react";
 import {
   ResponsiveContainer,
-  BarChart,
-  Bar,
+  LineChart,
+  Line,
   XAxis,
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend,
+  Legend
 } from "recharts";
 
 const HealthTrends = () => {
   const [isMobile, setIsMobile] = useState(false);
 
-  // Handle window resize safely
+  // Handle window resize
   useEffect(() => {
     setIsMobile(window.innerWidth < 768);
 
@@ -36,7 +36,7 @@ const HealthTrends = () => {
     { date: "17 Dec", present: 80, healthy: 45, overworked: 35, underutilized: 20 },
     { date: "18 Dec", present: 85, healthy: 50, overworked: 40, underutilized: 15 },
     { date: "19 Dec", present: 90, healthy: 55, overworked: 35, underutilized: 20 },
-    { date: "20 Dec", present: 95, healthy: 60, overworked: 30, underutilized: 25 },
+    { date: "20 Dec", present: 95, healthy: 60, overworked: 30, underutilized: 25 }
   ].reverse();
 
   // Custom Tooltip
@@ -76,10 +76,9 @@ const HealthTrends = () => {
       <h2 className="text-lg font-semibold mb-4">Health Trends</h2>
       <div className="h-[220px]">
         <ResponsiveContainer width="100%" height="100%">
-          <BarChart
+          <LineChart
             data={data}
             margin={isMobile ? { top: 5, right: 10, left: -20, bottom: 40 } : { top: 5, right: 10, left: -20, bottom: 20 }}
-            barSize={isMobile ? 8 : 16}
           >
             <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f0f0f0" />
             <XAxis
@@ -91,7 +90,7 @@ const HealthTrends = () => {
                 fontSize: 10,
                 angle: isMobile ? -45 : 0,
                 textAnchor: isMobile ? "end" : "middle",
-                dy: isMobile ? 8 : 0,
+                dy: isMobile ? 8 : 0
               }}
               height={40}
               interval={0}
@@ -105,11 +104,13 @@ const HealthTrends = () => {
             />
             <Tooltip content={<CustomTooltip />} />
             <Legend content={<CustomLegend />} />
-            <Bar dataKey="present" stackId="a" fill="#4ade80" radius={[4, 4, 0, 0]} />
-            <Bar dataKey="healthy" stackId="a" fill="#60a5fa" radius={[4, 4, 0, 0]} />
-            <Bar dataKey="overworked" stackId="a" fill="#ef4444" radius={[4, 4, 0, 0]} />
-            <Bar dataKey="underutilized" stackId="a" fill="#f59e0b" radius={[4, 4, 0, 0]} />
-          </BarChart>
+
+            {/* Lines with Markers */}
+            <Line type="monotone" dataKey="present" stroke="#4ade80" strokeWidth={2} dot={{ r: 4 }} />
+            <Line type="monotone" dataKey="healthy" stroke="#60a5fa" strokeWidth={2} dot={{ r: 4 }} />
+            <Line type="monotone" dataKey="overworked" stroke="#ef4444" strokeWidth={2} dot={{ r: 4 }} />
+            <Line type="monotone" dataKey="underutilized" stroke="#f59e0b" strokeWidth={2} dot={{ r: 4 }} />
+          </LineChart>
         </ResponsiveContainer>
       </div>
     </div>
