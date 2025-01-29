@@ -31,11 +31,14 @@ const WorkUploadForm = () => {
               name: '',
               description: '',
               category: '',
-              subCategories: [],
               imageArray: [],
               addVideo: false,
               video: '',
-              youtubeEmbedLinks: ['']
+              isFeatured: false,
+              youtubeEmbedLinks: [''],
+              subCategories: [],
+              threeD: '',
+              logo: ''
             }}
             onSubmit={(values) => {
               console.log(values);
